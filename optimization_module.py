@@ -102,7 +102,7 @@ class Optimization:
                     self.optimized = False
                 if self.opt_defocus_blur_model and os.path.exists(dof_model_path):
                     self.defocus_blur_model = blur_utils.PolynomialModel(degree=2).to(device)
-                    self.defocus_blur_model.load_state_dict(torch.load(dof_model_path))
+                    self.defocus_blur_model.load_state_dict(torch.load(dof_model_path, weights_only=True))
                     self.optimized = True
                 else:
                     print('DOF model not available!! Please run optimization and save models before loading!')
@@ -149,16 +149,16 @@ class Optimization:
             optim_strength = 0
             if self.motion_blur_model:
                 optim_strength = self.motion_blur_model
-                print('Before:', optim_strength)
+                # print('Before:', optim_strength)
             NN_to_blender_factor = 1.0
             self.flow_image = torch.from_numpy(self.flow_image*NN_to_blender_factor).permute(2, 0, 1).float().to(device)
 
             self.motion_blur_model = blur_utils.motion_blur_analysis(self.denoised_image, self.demotion_blurred_image,
                                                  self.flow_image, kernel_size=kernel_size, img_name=self.dataset_name)
             if self.motion_blur_model == 0.0 and optim_strength > 0.0:
-                print('Optimized:', self.motion_blur_model)
+                # print('Optimized:', self.motion_blur_model)
                 self.motion_blur_model = optim_strength
-                print('After:', self.motion_blur_model)
+                # print('After:', self.motion_blur_model)
             parameters['mb'] = self.motion_blur_model
 
         mb_modeling_end_time = time.perf_counter()

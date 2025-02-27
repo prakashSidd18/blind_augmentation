@@ -57,7 +57,9 @@ for count, dataset in enumerate(dataset_frame_id.keys()):
     downsize_dataset = dataset_frame_id[dataset]['downsize']
     # =====================================================================================================================
     '''Get input frames'''
-    img_filepath = r"data/original/{}.png".format(dataset)
+    # @TODO: Please set the data_path to <path/to/data/folder>
+    data_path = r"./data/"
+    img_filepath = os.path.join(data_path, r"original/{}.png".format(dataset))
     img_abspath = os.path.abspath(img_filepath)
     img_name = os.path.basename(img_filepath).split('.')[0]
     img_dir = os.path.join(os.path.dirname(img_abspath), img_name)
