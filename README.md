@@ -24,7 +24,7 @@ Our method “blindly” estimates a model of noise, motion blur (MB) and depth 
     - [Dataset Download](#1-dataset-download) 
     - [Install](#2-setup)
     - [Run](#3-running-on-standard-dataset)
-    - [Preprocess](#4-preprocess)
+    - [Pre-process](#4-preprocess)
 - [Real-time Unity Demo](#demo)
 - [Citation](#citation)
 
@@ -57,9 +57,9 @@ For new dataset/scenes we point to original implementation of off-the-shelf meth
 <a name="1-dataset-download"></a>
 ### 1. Dataset Download
 
-All 7 dataset can be dowloaded from [here](https://1drv.ms/u/c/a220080a7f502ec5/EcKLUxvCr0FErE8oHVezmxkBULjS83dSpiBC_6LZXcWm4w?e=1rUrYY) (~7GB).
+All 7 dataset/scenes can be dowloaded from [here](https://1drv.ms/u/c/a220080a7f502ec5/EcKLUxvCr0FErE8oHVezmxkBULjS83dSpiBC_6LZXcWm4w?e=1rUrYY) (~7GB).
 
-We also provide a smaller dataset to quickly run our single-frame optimization (see [Run](#3-running-on-standard-dataset)) [here](https://1drv.ms/u/c/a220080a7f502ec5/EcKLUxvCr0FErE8oHVezmxkBULjS83dSpiBC_6LZXcWm4w?e=1rUrYY) (~300MB). 
+We also provide a smaller dataset (with 2 scenes) to quickly run our single-frame optimization (see [Run](#3-running-on-standard-dataset)) [here](https://1drv.ms/u/c/a220080a7f502ec5/EcKLUxvCr0FErE8oHVezmxkBULjS83dSpiBC_6LZXcWm4w?e=1rUrYY) (~300MB). 
 
 
 Once downloaded, unzip the zipped file to store data in the following folder structure:
@@ -101,7 +101,7 @@ Once downloaded, unzip the zipped file to store data in the following folder str
 ```
 The `<path/to/dataset/>` is the path to `data` folder. The original captured image are stored in `./data/original/<DATASET>/` folder. 
 
-Pre-process can be run on new dataset by providing captured frames in this folder. See [Preprocess](#4-preprocess) for more details.
+Pre-process can be run on new dataset by providing captured frames in this folder. See [Pre-process](#4-preprocess) for more details.
 
 Composite frames are dataset/scene specific and are rendered using Blender. A sample Blender file with automated scripts are provided in the `./data/composite/` folder.
 
