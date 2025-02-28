@@ -1,5 +1,8 @@
+.venv*
+__MACOSX/
+*.zip
 .ipynb_checkpoints/
-.idea/
+.idea/COSX/
 __pycache__/
 data/
 output*/

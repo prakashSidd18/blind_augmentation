@@ -163,11 +163,7 @@ for count, dataset in enumerate(dataset_frame_id.keys()):
                     generated_noise = laplace_noise_utils.synthesise_noise_luma_intercept(input_noise,
                                                                                           grayscale_img,
                                                                                           optimizer.noise_model,
-                                                                                          pyr_generator)[0].to(device)
-                    # generated_noise = laplace_noise_utils.synthesise_noise(input_noise,
-                    #                                                             denoised_img,
-                    #                                                             optimizer.noise_model,
-                    #                                                             pyr_generator)[0].to(device)
+                                                                                          pyr_generator)[0].to(device)                    
 
                     noise_added_image = (optimizer.denoised_image + generated_noise).clip(0, 1)
 
@@ -191,11 +187,7 @@ for count, dataset in enumerate(dataset_frame_id.keys()):
                     if optimizer.optimized:
                         optimizer.flow_image = torch.from_numpy(optimizer.flow_image).permute(2, 0, 1).float().to(device)
                     flow_image = optimizer.motion_blur_model.item() * optimizer.flow_image
-                    # motion_blur_synthesized_image = blur_utils.motion_blur_optim(optimizer.demotion_blurred_image, flow_image,
-                    #                                                              optimizer.kernel_size)
-                    # utils.save_image(motion_blur_synthesized_image, img_name=img_name,
-                    #                 file_desc='/{}/synth_MB_image_{:.3f}'.format(fName, optimizer.motion_blur_model), fmt='png')
-
+                    
                     mb_params[frame_id] = optimizer.motion_blur_model.item()
                     px = 1 / plt.rcParams['figure.dpi']  # pixel in inches
                     fig, ax = plt.subplots(figsize=(img_width*px, img_height*px), facecolor='white')
@@ -301,18 +293,7 @@ for count, dataset in enumerate(dataset_frame_id.keys()):
                 plt.close()
 
                 dof_viz_frames.append(dof_fig.astype('float32'))
-
-                # depth_image = optimizer.depth_image.view(-1)
-                # sigma = ((optimizer.defocus_blur_model(depth_image) - dof_minima + 1e-3) /
-                #          (dof_maxima - dof_minima + 1e-3)) * dof_maxima
-                # sigma = sigma.view(img_height, img_width)
-                # depth_image = depth_image.view(img_height, img_width)
-                #
-                # defocus_blur_synthesized_image = blur_utils.custom_conv2d_optim(optimizer.focused_image, sigma,
-                #                                                                 optimizer.kernel_size,
-                #                                                                 padding=optimizer.kernel_size // 2)
-                # utils.save_image(defocus_blur_synthesized_image, img_name=img_name,
-                #                  file_desc='/{}/synth_DOF_image'.format(fName), fmt='png')
+                
         # =============================================================================================================
 
         if composite:
@@ -375,7 +356,7 @@ for count, dataset in enumerate(dataset_frame_id.keys()):
 
             if optimizer.defocus_blur_model or optimizer.motion_blur_model or optimizer.noise_model:
                 if next_optim_frame <= frame_id or frame_id == (opt_frame*skip_frames):
-                    blurred_composite = utils.add_text(blurred_composite, "Model updated...")
+                    # blurred_composite = utils.add_text(blurred_composite, "Model updated...")
                     next_optim_frame = frame_id + max(int(np.ceil(optimization_time * fps)), 1)
                     # print('Next optimization frame: ', next_optim_frame)
 

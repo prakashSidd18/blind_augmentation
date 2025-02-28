@@ -122,11 +122,7 @@ for count, dataset in enumerate(dataset_frame_id.keys()):
 
         if opt_noise_model and visualize:
             '''### Noise Optimization Viz ###'''
-            # Generate image noise in shape of original noise
-            # input_noise, generated_noise = noise_utils.eval_noise_model(optimizer.noise_image,
-            #                                                             optimizer.grayscale_image,
-            #                                                             optimizer.noise_model)
-
+            
             pyr_generator = LaplacePyramidGenerator()
             denoised_img = optimizer.denoised_image.cpu().float()[None, ...]
             grayscale_img = optimizer.grayscale_image.cpu().float()[None, None, :, :]
