@@ -37,7 +37,7 @@ skip_frames = 1
 
 composite = True
 
-# Select (uncomment) the scenes to test
+# Toggle (uncomment) the scenes to test
 dataset_frame_id = {
     'nikon_varying_ISO': {'opt_frame': 5, 'dilation': True, 'erosion': True, 'debug_frame': 400,
                           'noise': True, 'mb': False, 'dof': False, 'downsize': False, 'fps': 30, 'skip': 1},

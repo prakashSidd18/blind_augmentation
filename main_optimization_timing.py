@@ -32,7 +32,7 @@ save_model = False
 # Run optimization over every `n` frames and report mean timings; default n=10
 skip_frames = 10
 
-# Select (uncomment) the scenes to test
+# Toggle (uncomment) the scenes to test
 dataset_frame_id = {
                     'flir_noisy_rainbowballmotion': {'opt_frame': 5, 'dilation': True, 'erosion': True, 'debug_frame': 26,
                                                      'noise': True, 'mb': True, 'dof': True, 'downsize': False},
