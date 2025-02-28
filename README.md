@@ -11,7 +11,7 @@
 <sup>1</sup>University College London, <sup>2</sup>Birmingham City University, <sup>3</sup>University of Leeds<br>
 
 
-![Teaser](images/teaser.png "Teaser Image")
+![Teaser](images/Teaser.png "Teaser Image")
 <div style="text-align: justify"> 
 Our method “blindly” estimates a model of noise, motion blur (MB) and depth of field (DoF) from input frames (left), i.e., without
 		requiring any known calibration markers / objects. The model can then augment other images with virtual objects that appear visually
@@ -57,9 +57,9 @@ For new dataset/scenes we point to original implementation of off-the-shelf meth
 <a name="1-dataset-download"></a>
 ### 1. Dataset Download
 
-All 7 dataset/scenes can be dowloaded from [here](https://1drv.ms/u/c/a220080a7f502ec5/EcKLUxvCr0FErE8oHVezmxkBULjS83dSpiBC_6LZXcWm4w?e=1rUrYY) (~7GB).
+All 7 dataset/scenes can be dowloaded from [here](https://1drv.ms/u/c/a220080a7f502ec5/EcKLUxvCr0FErE8oHVezmxkBULjS83dSpiBC_6LZXcWm4w?e=mNYh27) (~7GB).
 
-We also provide a smaller dataset (with 2 scenes) to quickly run our single-frame optimization (see [Run](#3-running-on-standard-dataset)) [here](https://1drv.ms/u/c/a220080a7f502ec5/EcKLUxvCr0FErE8oHVezmxkBULjS83dSpiBC_6LZXcWm4w?e=1rUrYY) (~300MB). 
+We also provide a smaller dataset (with 2 scenes) to quickly run our single-frame optimization (see [Run](#3-running-on-standard-dataset)) [here](https://1drv.ms/u/c/a220080a7f502ec5/ETL2DPPovrRKnf6fZLbwsQsBWrfgcFr4f9aCzij1cXiBRA?e=dU5Eic) (~380MB). 
 
 
 Once downloaded, unzip the zipped file to store data in the following folder structure:
@@ -156,12 +156,51 @@ For example, results for dataset `flir_noisy_rainbowballmotion` will be stored a
 <a name="4-preprocess"></a>
 ### 4. Pre-process
 
+All off-the-shelf operator used in this paper are summarized along with their code repositories in the table below. 
+The code were used out-of-the-box with pre-trained models provided in their respective repositories.  
+
+|    Operation    |                                        Method                                        |                                           Code                                           |
+|:---------------:|:------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------:|
+|   `removeMB`    |     [Li et al. 2023](https://dasongli1.github.io/publication/grouped-shift-net/)     |     [https://github.com/dasongli1/Shift-Net](https://github.com/dasongli1/Shift-Net)     |
+|   `removeDoF`   |          [Ruan et al. 2022](https://lyruan.com/Projects/DRBNet/index.html)           |      [https://github.com/lingyanruan/DRBNet](https://github.com/lingyanruan/DRBNet)      |
+|  `removeNoise`  |               [Zamir et al. 2022](https://arxiv.org/abs/2111.09881)                |         [https://github.com/swz30/Restormer](https://github.com/swz30/Restormer)         |
+|    `getFlow`    | [Ilg et al. 2017](https://lmb.informatik.uni-freiburg.de/Publications/2017/IMKDB17/) | [https://github.com/NVIDIA/flownet2-pytorch](https://github.com/NVIDIA/flownet2-pytorch) |
+|   `getDepth`    |               [Ranftl et al. 2019](https://arxiv.org/abs/1907.01341v3)               |           [https://github.com/isl-org/MiDaS](https://github.com/isl-org/MiDaS)           |
+
+
+We provide a bash script `preprocess.sh` which can be used to create all intermediary data (except composite frames) from 
+original frames. 
+The script lists all arguments used to run the codes. All unlisted argument were kept to default values.
+
+To use the script: 
+1. Place the original frame in `/path/to/Restormer/demo/<DATASET>` folder.
+2. Update all paths in the script to point to the respective methods provided in above table including `/path/to/data/`
+folder.
+3. Ensure all pre-process methods are installed and running.
+4. Run the bash script (provide execute permissions to the script, if required)
+    ```sh
+    ./preprocess.sh
+    ```
+
+The script will automatically populate the undistorted frames and geometry buffers in the respective folders under `data/`
+folder.
+
+
 <a name="demo"></a>
 ## Real-time Unity Demo
 
-We provide the Unity project to run our demo [here]() (~2GB).
+We provide the Unity project to run the real-time demo [here](https://1drv.ms/u/c/a220080a7f502ec5/EaxEgaSHx-lEqxYYFDYLEqMB0x7HyMNC-J057QzZptyzBA?e=psp8ZP) (~2.5GB).
 
+Steps for deployment of demo with recovered parameters:
+1. Grab a screen capture from the headset using passthrough functionality.
+2. Run pre-process on the captured frames followed by optimization on one or multiple frame(s).
+3. Set the recovered parameters for MB and DoF in the motion blur and de-focus blur plugin in the project using UI.
+4. Set the recovered noise texture as the film grain plugin texture.
+5. Build and deploy the demo on the headset.
 
+Unity's build package functionality can be used to deploy the demo on popular HMDs.
+
+This demo has been successfully tested on [Meta Quest 3](https://www.meta.com/quest/quest-3/) and [Varjo XR-3](https://varjo.com/products/varjo-xr-3/) HMDs.
 
 <a name="citation"></a>
 ## Citation

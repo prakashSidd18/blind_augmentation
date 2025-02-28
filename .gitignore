@@ -2,7 +2,7 @@
 __MACOSX/
 *.zip
 .ipynb_checkpoints/
-.idea/COSX/
+.idea/
 __pycache__/
 data/
 output*/
