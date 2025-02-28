@@ -52,7 +52,7 @@ class IO():
         self.skip_frames = skip_frames
 
         if os.path.exists(self.img_dir):
-            self.filenames = os.listdir(self.img_dir)[:-1]
+            self.filenames = sorted(os.listdir(self.img_dir)[:-1])
             self.totalNumFrames = len(self.filenames)
             self.single_frame_mode = single_frame_mode
             self.frame_ID = frame_id
