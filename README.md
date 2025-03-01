@@ -1,9 +1,10 @@
 # Blind Augmentation: Calibration-free Camera Distortion Model Estimation for Real-time Mixed-reality Consistency
 
+[![Paper](https://img.shields.io/badge/Paper-arXiv-b31b1b?logo=arxiv&logoColor=red)]()
 [![Project Page](https://img.shields.io/badge/Project-Page-green?logo=googlechrome&logoColor=green)](https://prakashsidd18.github.io/projects/blind_augmentation/)
-[![YouTube Video](https://img.shields.io/badge/YouTube-Video-red?logo=youtube&logoColor=red)](https://youtu.be/YhK5wjmVYjg)
-<!-- [![Paper](https://img.shields.io/badge/Paper-arXiv-b31b1b?logo=arxiv&logoColor=red)]() -->
-
+[![Supplementary Video](https://img.shields.io/badge/Supplementary-Video-red?logo=youtube&logoColor=red)](https://youtu.be/YhK5wjmVYjg)
+[![Presentation Video](https://img.shields.io/badge/Video-Presentation-F9D371)](https://youtu.be/wQ7zTkip2yU)
+[![Presentation Slides](https://img.shields.io/badge/Presentation-Slides-B762C1)](https://1drv.ms/p/c/a220080a7f502ec5/EWekm8VApqtLiqN8srFWvwIBbqiRucFjvkj0OnzKHBLR0g?e=RbMZlZ)
 
 [Siddhant Prakash](https://prakashsidd18.github.io/)<sup>1</sup>, [David R. Walton](https://drwalton.github.io/)<sup>2</sup>, [Rafael K. dos Anjos](https://rafaelkuffner.github.io/)<sup>3</sup>, [Anthony Steed](https://wp.cs.ucl.ac.uk/anthonysteed/)<sup>1</sup>, [Tobias Ritschel](https://www.homepages.ucl.ac.uk/~ucactri/)<sup>1</sup>
 
@@ -201,6 +202,12 @@ Steps for deployment of demo with recovered parameters:
 Unity's build package functionality can be used to deploy the demo on popular HMDs.
 
 This demo has been successfully tested on [Meta Quest 3](https://www.meta.com/quest/quest-3/) and [Varjo XR-3](https://varjo.com/products/varjo-xr-3/) HMDs.
+
+## Acknowledgement
+
+The authors wish to thank Sebastian Friston and David Swapp for early discussions, 
+and David Mandl for providing the code for [Neural Cameras [MandlEtAl 2021]](https://immersive-technology-lab.github.io/projects/neuralcameras/).
+This work was funded by the [EPSRC/UKRI project EP/T01346X/1](https://gow.epsrc.ukri.org/NGBOViewGrant.aspx?GrantRef=EP/T01346X/1).
 
 <a name="citation"></a>
 ## Citation

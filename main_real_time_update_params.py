@@ -259,41 +259,43 @@ for count, dataset in enumerate(dataset_frame_id.keys()):
                         plt.close()
                         dof_viz_frames.append(dof_fig.astype('float32'))
 
+            # Not optimizing but visualizing
             elif visualize:
-                pyr_generator = LaplacePyramidGenerator()
-                denoised_img = optimizer.denoised_image.cpu().float()[None, ...]
-                grayscale_img = optimizer.grayscale_image.cpu().float()[None, None, :, :]
-                input_noise = torch.randn_like(optimizer.noise_image[None, ...]).cpu()
-                generated_noise = laplace_noise_utils.synthesise_noise_luma_intercept(input_noise,
-                                                                                      grayscale_img,
-                                                                                      optimizer.noise_model,
-                                                                                      pyr_generator)[0].to(device)
-                noise_added_image = (optimizer.denoised_image + generated_noise).clip(0, 1)
-                # clip noise image to save as png
-                optimizer.noise_image = utils.tonemap_noise(optimizer.noise_image) * noise_intensity_multiplier
-                generated_noise = utils.tonemap_noise(generated_noise) * noise_intensity_multiplier
-                noise_viz_frames.append(noise_added_image)
-                gen_noise_viz_frames.append(generated_noise)
-                gt_noise_viz_frames.append(optimizer.noise_image)
-
-                mb_params[frame_id] = optimizer.motion_blur_model.item()
-                px = 1 / plt.rcParams['figure.dpi']  # pixel in inches
-                fig, ax = plt.subplots(figsize=(img_width * px, img_height * px), facecolor='white')
-                ax.set_facecolor("white")
-                ax.plot(range(numFrames), mb_params, '.', label='Estimated Exposure')
-                plt.xlabel('Frame ID')
-                plt.ylabel('Exposure')
-                plt.ylim(0, 1.2)
-                plt.legend()
-                fig.canvas.draw()
-                # Convert the canvas to a raw RGB buffer
-                buf = fig.canvas.tostring_rgb()
-                ncols, nrows = fig.canvas.get_width_height()
-                mb_fig = np.frombuffer(buf, dtype=np.uint8).reshape(nrows, ncols, 3) / 255.0
-                mb_viz_frames.append(mb_fig.astype('float32'))
-                plt.close()
-
-                dof_viz_frames.append(dof_fig.astype('float32'))
+                if opt_noise_model:
+                    pyr_generator = LaplacePyramidGenerator()
+                    denoised_img = optimizer.denoised_image.cpu().float()[None, ...]
+                    grayscale_img = optimizer.grayscale_image.cpu().float()[None, None, :, :]
+                    input_noise = torch.randn_like(optimizer.noise_image[None, ...]).cpu()
+                    generated_noise = laplace_noise_utils.synthesise_noise_luma_intercept(input_noise,
+                                                                                          grayscale_img,
+                                                                                          optimizer.noise_model,
+                                                                                          pyr_generator)[0].to(device)
+                    noise_added_image = (optimizer.denoised_image + generated_noise).clip(0, 1)
+                    # clip noise image to save as png
+                    optimizer.noise_image = utils.tonemap_noise(optimizer.noise_image) * noise_intensity_multiplier
+                    generated_noise = utils.tonemap_noise(generated_noise) * noise_intensity_multiplier
+                    noise_viz_frames.append(noise_added_image)
+                    gen_noise_viz_frames.append(generated_noise)
+                    gt_noise_viz_frames.append(optimizer.noise_image)
+                if opt_motion_blur_model:
+                    mb_params[frame_id] = optimizer.motion_blur_model.item()
+                    px = 1 / plt.rcParams['figure.dpi']  # pixel in inches
+                    fig, ax = plt.subplots(figsize=(img_width * px, img_height * px), facecolor='white')
+                    ax.set_facecolor("white")
+                    ax.plot(range(numFrames), mb_params, '.', label='Estimated Exposure')
+                    plt.xlabel('Frame ID')
+                    plt.ylabel('Exposure')
+                    plt.ylim(0, 1.2)
+                    plt.legend()
+                    fig.canvas.draw()
+                    # Convert the canvas to a raw RGB buffer
+                    buf = fig.canvas.tostring_rgb()
+                    ncols, nrows = fig.canvas.get_width_height()
+                    mb_fig = np.frombuffer(buf, dtype=np.uint8).reshape(nrows, ncols, 3) / 255.0
+                    mb_viz_frames.append(mb_fig.astype('float32'))
+                    plt.close()
+                if opt_defocus_blur_model:
+                    dof_viz_frames.append(dof_fig.astype('float32'))
                 
         # =============================================================================================================
 
