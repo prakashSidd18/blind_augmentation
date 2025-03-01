@@ -49,16 +49,16 @@ This allows to auto-tune any black-box real-time noise+MB+DoF method to deliver 
 <a name="code"></a>
 ## Dataset, Code & Preprocess
 
-We provide code to run optimization and compositing along with dataset for 7 dataset/scenes used in the original paper. 
+We provide code to run optimization and compositing along with a dataset with 7 scenes used in the original paper. 
 
-We have run pre-process on the 7 dataset and provide all intermediary frames along with compositing frames. 
+We have run pre-process on the 7 scenes and provide all intermediary frames along with compositing frames. 
 
-For new dataset/scenes we point to original implementation of off-the-shelf methods which we used in this paper. 
+For new dataset/scenes we point to original implementation of off-the-shelf methods which we used for pre-processing in this paper. 
 
 <a name="1-dataset-download"></a>
 ### 1. Dataset Download
 
-All 7 dataset/scenes can be dowloaded from [here](https://1drv.ms/u/c/a220080a7f502ec5/EcKLUxvCr0FErE8oHVezmxkBULjS83dSpiBC_6LZXcWm4w?e=mNYh27) (~7GB).
+All 7 scenes can be dowloaded from [here](https://1drv.ms/u/c/a220080a7f502ec5/EcKLUxvCr0FErE8oHVezmxkBULjS83dSpiBC_6LZXcWm4w?e=mNYh27) (~7GB).
 
 We also provide a smaller dataset (with 2 scenes) to quickly run our single-frame optimization (see [Run](#3-running-on-standard-dataset)) [here](https://1drv.ms/u/c/a220080a7f502ec5/ETL2DPPovrRKnf6fZLbwsQsBWrfgcFr4f9aCzij1cXiBRA?e=dU5Eic) (~380MB). 
 
@@ -100,11 +100,12 @@ Once downloaded, unzip the zipped file to store data in the following folder str
 .
 .
 ```
-The `<path/to/dataset/>` is the path to `data` folder. The original captured image are stored in `./data/original/<DATASET>/` folder. 
+The `<path/to/dataset/>` is the path to `data` folder. The original captured image are stored in `./data/original/<SCENE>/` folder. 
 
 Pre-process can be run on new dataset by providing captured frames in this folder. See [Pre-process](#4-preprocess) for more details.
 
-Composite frames are dataset/scene specific and are rendered using Blender. A sample Blender file with automated scripts are provided in the `./data/composite/` folder.
+Composite frames are dataset/scene specific and are rendered using Blender.
+A sample Blender file with automated scripts to generate composite frame (geometry + differential rendering) buffers for each frame in the scene is provided `flir_noisy_rainbowballmotion.blend`.
 
 
 
@@ -131,8 +132,8 @@ All requirements to run code will be installed in the virtual environment.
 <a name="3-running-on-standard-dataset"></a>
 ### 3. Run
 
-1. Download the standard dataset (see above) and copy the `<path/to/dataset/>`.
-2. Run single frame optimization & compositing using the script `main_single_frame_optimization_composite.py` specifying the `<path/to/dataset/>` as argument. If no path is specified, the script assumes `<path/to/dataset/>` as current folder `./data/`.
+1. Download the standard dataset (see above) and copy `<path/to/dataset/>`.
+2. Run single frame optimization & compositing using the script `main_single_frame_optimization_composite.py` specifying `<path/to/dataset/>` as argument. If no path is specified, the script assumes `<path/to/dataset/>` as current folder `./data/`.
 
     ```sh
     # Run optimization on single-frame and composite
@@ -147,18 +148,19 @@ All requirements to run code will be installed in the virtual environment.
     # Time the optimization 
     python main_optimization_timing.py <path/to/dataset/>
     ```
-The output of the script will be generated in `./output/` folder in the current directory. 
+The script will generate results in `./output/` folder in the current directory. 
 
-The scripts can generate results from multiple dataset/scenes, which can be toggled ON/OFF as desired within the script. A separate folder inside the output folder for each dataset will be created.
-The ouput videos can be found in respective dataset folder as `./output/<DATASET>_result_/*.mp4`. 
+Each script can generate results from multiple scenes, which can be toggled ON/OFF as desired. 
+A separate folder inside the output folder for each scene will be created.
+The ouput videos can be found in respective scene folder as `./output/<SCENE>_result_/*.mp4`. 
 
-For example, results for dataset `flir_noisy_rainbowballmotion` will be stored as `./output/flir_noisy_rainbowballmotion_result_/flir_noisy_rainbowballmotion_result_blurred_composite.mp4` and a comparison with naive approach as `./output/flir_noisy_rainbowballmotion_result_/flir_noisy_rainbowballmotion_result_naive_vs_ours.mp4`.
+For example, results for scene `flir_noisy_rainbowballmotion` will be stored as `./output/flir_noisy_rainbowballmotion_result_/flir_noisy_rainbowballmotion_result_blurred_composite.mp4` and a comparison with naive approach as `./output/flir_noisy_rainbowballmotion_result_/flir_noisy_rainbowballmotion_result_naive_vs_ours.mp4`.
 
 <a name="4-preprocess"></a>
 ### 4. Pre-process
 
 All off-the-shelf operator used in this paper are summarized along with their code repositories in the table below. 
-The code were used out-of-the-box with pre-trained models provided in their respective repositories.  
+These codes were used out-of-the-box with pre-trained models provided in their respective repositories.  
 
 |    Operation    |                                        Method                                        |                                           Code                                           |
 |:---------------:|:------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------:|
@@ -171,10 +173,10 @@ The code were used out-of-the-box with pre-trained models provided in their resp
 
 We provide a bash script `preprocess.sh` which can be used to create all intermediary data (except composite frames) from 
 original frames. 
-The script lists all arguments used to run the codes. All unlisted argument were kept to default values.
+This script lists all arguments used to run the codes. All unlisted argument were kept to default values.
 
-To use the script: 
-1. Place the original frame in `/path/to/Restormer/demo/<DATASET>` folder.
+To use this script: 
+1. Place the original frame in `/path/to/Restormer/demo/<SCENE>` folder.
 2. Update all paths in the script to point to the respective methods provided in above table including `/path/to/data/`
 folder.
 3. Ensure all pre-process methods are installed and running.
@@ -183,7 +185,7 @@ folder.
     ./preprocess.sh
     ```
 
-The script will automatically populate the undistorted frames and geometry buffers in the respective folders under `data/`
+This script will automatically populate the undistorted frames and geometry buffers in the respective folders under `data`
 folder.
 
 

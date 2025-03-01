@@ -1,7 +1,6 @@
 
 import os
 import sys
-
 import imageio
 import torch
 import time
@@ -13,7 +12,6 @@ import utils
 import io_module
 import optimization_module
 import composite_module
-
 from laplace_pyramid import LaplacePyramidGenerator
 import laplace_noise_generation as laplace_noise_utils
 
@@ -58,7 +56,11 @@ for count, dataset in enumerate(dataset_frame_id.keys()):
     '''Get input frames'''
     # @TODO: Please set the data_path to <path/to/data/folder>; Default assumes "data" folder in the same folder as scripts
     cwd = os.path.dirname(os.path.abspath(__file__))
-    data_path = f"{cwd}/data/"
+    if len(sys.argv) > 1:
+        data_path = sys.argv[1]
+    else:
+        data_path = f"{cwd}/data/"
+    print(f"Dataset Path: {data_path}")
     img_filepath = os.path.join(data_path, r"original/{}.png".format(dataset))
     img_abspath = os.path.abspath(img_filepath)
     img_name = os.path.basename(img_filepath).split('.')[0]
