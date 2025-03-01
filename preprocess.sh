@@ -4,7 +4,7 @@ exec 3>&1 4>&2
 trap 'exec 2>&4 1>&3' 0 1 2 3
 exec 1>log_preprocess_quest3_leeds.txt 2>&1
 
-### @TODO Update and uncomment dataset names, frame number, required paths, and conda/venv as required ###
+### @TODO Update and uncomment scene names, frame number, required paths, and conda/venv as required ###
 
 ## Results
 #DATASET=(
@@ -34,7 +34,7 @@ CWD=$(pwd)
 # https://github.com/isl-org/MiDaS
 #DEPTH_DIR=<path/to/MiDaS/>
 
-### @TODO This script assume the original images for dataset/scene is provided in the $DENOISE_DIR/demo/<DATASET> folder ###
+### @TODO This script assume the original images for each scene is provided in the $DENOISE_DIR/demo/<SCENE> folder ###
 
 for i in "${!DATASET[@]}"
 do
