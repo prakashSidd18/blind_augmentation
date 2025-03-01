@@ -192,7 +192,7 @@ folder.
 <a name="demo"></a>
 ## Real-time Unity Demo
 
-We provide the Unity project to run the real-time demo [here](https://1drv.ms/u/c/a220080a7f502ec5/EaxEgaSHx-lEqxYYFDYLEqMB0x7HyMNC-J057QzZptyzBA?e=psp8ZP) (~2.5GB).
+We provide the Unity project to run a real-time demo [here](https://1drv.ms/u/c/a220080a7f502ec5/EaxEgaSHx-lEqxYYFDYLEqMB0x7HyMNC-J057QzZptyzBA?e=psp8ZP) (~2.5GB).
 
 Steps for deployment of demo with recovered parameters:
 1. Grab a screen capture from the headset using passthrough functionality.
