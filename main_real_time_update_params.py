@@ -225,6 +225,9 @@ for count, dataset in enumerate(dataset_frame_id.keys()):
                     y = ((y - dof_minima) / (dof_maxima - dof_minima)) * dof_maxima
 
                     if visualize:
+                        save_path = os.path.join(img_name + "_result_",
+                                 "{}/{}_blur_parameters.npy".format(fName, img_name))
+                        utils.create_folder(save_path)
                         px = 1 / plt.rcParams['figure.dpi']  # pixel in inches
                         fig, ax = plt.subplots(figsize=(512 * px, 512 * px), facecolor='white')
                         ax.set_facecolor("white")
@@ -236,9 +239,9 @@ for count, dataset in enumerate(dataset_frame_id.keys()):
                         plt.ylabel('Optimal Blur Radius')
                         plt.legend()
                         plt.ylim(0, 10)
-                        plt.savefig(os.path.join("./images", img_name + "_result_",
+                        plt.savefig(os.path.join("./output", img_name + "_result_",
                                                  "{}/{}_blur_radius_vs_depth_fit_degree2_lbfgs.png".format(fName, img_name)))
-                        plt.savefig(os.path.join("./images", img_name + "_result_",
+                        plt.savefig(os.path.join("./output", img_name + "_result_",
                                                  "{}/{}_blur_radius_vs_depth_fit_degree2_lbfgs.pdf".format(fName, img_name)))
 
                         plt.close()
