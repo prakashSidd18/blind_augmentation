@@ -1,6 +1,6 @@
 # Blind Augmentation: Calibration-free Camera Distortion Model Estimation for Real-time Mixed-reality Consistency
 
-[![Paper](https://img.shields.io/badge/Paper-arXiv-b31b1b?logo=arxiv&logoColor=red)]()
+[![Paper](https://img.shields.io/badge/Paper-arXiv-b31b1b?logo=arxiv&logoColor=red)](https://arxiv.org/abs/2503.01387)
 [![Project Page](https://img.shields.io/badge/Project-Page-green?logo=googlechrome&logoColor=green)](https://prakashsidd18.github.io/projects/blind_augmentation/)
 [![Supplementary Video](https://img.shields.io/badge/Supplementary-Video-red?logo=youtube&logoColor=red)](https://youtu.be/YhK5wjmVYjg)
 [![Presentation Video](https://img.shields.io/badge/Video-Presentation-F9D371)](https://youtu.be/wQ7zTkip2yU)
