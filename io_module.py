@@ -29,14 +29,15 @@ class IO():
         self.img_abspath = os.path.abspath(img_filepath)
         self.img_name = os.path.basename(img_filepath).split('.')[0]
         self.img_dir = os.path.join(os.path.dirname(self.img_abspath), self.img_name)
+        self.data_path = os.path.dirname(os.path.dirname(self.img_abspath))
 
         # Path to input data directory
-        self.defocus_img_path = os.path.abspath(r"data/de_focus_blurred/")
-        self.demotion_img_path = os.path.abspath(r"data/de_motion_blurred/")
-        self.denoised_img_path = os.path.abspath(r"data/denoised/")
-        self.composite_img_path = os.path.abspath(r"data/composites/")
-        self.depth_img_path = os.path.abspath(r"data/depth/")
-        self.flow_img_path = os.path.abspath(r"data/flow/")
+        self.defocus_img_path = os.path.abspath(f"{self.data_path}/de_focus_blurred/")
+        self.demotion_img_path = os.path.abspath(f"{self.data_path}/de_motion_blurred/")
+        self.denoised_img_path = os.path.abspath(f"{self.data_path}/denoised/")
+        self.composite_img_path = os.path.abspath(f"{self.data_path}/composites/")
+        self.depth_img_path = os.path.abspath(f"{self.data_path}/depth/")
+        self.flow_img_path = os.path.abspath(f"{self.data_path}/flow/")
 
         self.scale_down = scale_down
         self.scale = scale

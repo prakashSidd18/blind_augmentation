@@ -4,5 +4,5 @@ __MACOSX/
 .ipynb_checkpoints/
 .idea/
 __pycache__/
-data/
+data*/
 output*/
