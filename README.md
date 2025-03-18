@@ -215,11 +215,15 @@ This work was funded by the [EPSRC/UKRI project EP/T01346X/1](https://gow.epsrc.
 ## Citation
 
 ```
-@Article{prakash2025blind,
-  author  = "Prakash, Siddhant and Walton, David R. and dos Anjos, Rafael K. and Steed, Anthony and Ritschel, Tobias",
-  title   = "Blind Augmentation: Calibration-free Camera Distortion Model Estimation for Real-time Mixed-reality Consistency",
-  journal = "IEEE Transactions on Visualization and Computer Graphics (IEEEVR 2025)",
-  year    = "2025",
-	  
+@ARTICLE{10919204,
+  author={Prakash, Siddhant and Walton, David R. and Anjos, Rafael K. dos and Steed, Anthony and Ritschel, Tobias},
+  journal={IEEE Transactions on Visualization and Computer Graphics}, 
+  title={Blind Augmentation: Calibration-free Camera Distortion Model Estimation for Real-time Mixed-reality Consistency}, 
+  year={2025},
+  volume={},
+  number={},
+  pages={1-11},
+  keywords={Noise;Cameras;Distortion;Streaming media;Calibration;Training;Real-time systems;Rendering (computer graphics);Geometry;Image color analysis;Augmented Reality;optimization},
+  doi={10.1109/TVCG.2025.3549541}}
 }
 ```
